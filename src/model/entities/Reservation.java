@@ -43,9 +43,21 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
-	public void updates(Date checkin, Date checkout) {
+	public String updates(Date checkin, Date checkout) {
+		
+		Date now = new Date();
+		
+		if(checkin.before(now) || checkout.before(now)) {
+			return "As datas não são validas!";
+		}
+		if(!checkout.after(checkin) && checkin.before(checkout)){
+			return "Erro na reserva, as datas não batem";
+		}
+		
 		this.checkin = checkin;
 		this.checkout = checkout;
+		return null;
+		
 	}
 	
 	@Override

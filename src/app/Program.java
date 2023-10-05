@@ -33,15 +33,11 @@ public class Program {
 			System.out.print("Data de checkout:  ");
 			checkout= sdf.parse(sc.next());
 			
-			
-			Date now = new Date();
-			
-			if(checkin.before(now) || checkout.before(now)) {
-				System.out.println("As datas não são validas!");
-			}else if(!checkout.after(checkin) && checkin.before(checkout)){
-				System.out.println("Erro na reserva, as datas não batem");
-			}else {
-				reservation.updates(checkin, checkout);
+			String error = reservation.updates(checkin, checkout);
+			if(error != null) {
+				System.out.println("Ocorreu um erro!"+error);
+			}
+			else {
 				System.out.println("Reserva: "+reservation);
 			}
 			
