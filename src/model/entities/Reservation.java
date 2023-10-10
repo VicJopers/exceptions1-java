@@ -18,7 +18,10 @@ public class Reservation {
 
 	}
 
-	public Reservation(Integer roomNumber, Date checkin, Date checkout) {
+	public Reservation(Integer roomNumber, Date checkin, Date checkout) throws DomainException {
+		if(!checkout.after(checkin)){
+			throw new DomainException("Erro na reserva, a data de checkout não pode ser anterior a data de checkin!");
+		}
 		this.roomNumber = roomNumber;
 		this.checkin = checkin;
 		this.checkout = checkout;
